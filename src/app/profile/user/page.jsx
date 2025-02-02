@@ -15,7 +15,7 @@ export default function User() {
       <p> this general user page</p>
       <button onClick={handleClick}>Click Me</button>
       <div>
-        {userList.map((user,index) => (
+        {userList.map((user, index) => (
           <p key={index}>{user.name}</p>
         ))}
       </div>
