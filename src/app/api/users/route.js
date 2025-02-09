@@ -12,7 +12,7 @@ connectDB();
  * */
 export async function GET(request) {
   try {
-    const userList = await User.find({});
+    const userList = await User.find();
 
     return NextResponse.json(userList);
   } catch (error) {
@@ -28,7 +28,6 @@ export async function GET(request) {
 export async function POST(request, { params }) {
   try {
     const { name, email, password, about, profileUrl } = await request.json();
-    console.log(request.json());
     const user = new User({
       name,
       email,
