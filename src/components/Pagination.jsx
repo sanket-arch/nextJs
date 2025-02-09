@@ -1,9 +1,21 @@
 "use client";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { useState, useEffect } from "react";
 
-export default function Pagination({ totalPage, currentPage, onPageChange }) {
-  // Function to handle page changes without full reload
+export default function Pagination({
+  totalPage,
+  currentPage =1,
+  pageLimit = 5,
+  onPageChange,
+}) {
+  const [pageStart, setPageStart] = useState(1);
+
+  useEffect(() => {
+    const newStart = Math.floor((currentPage - 1) / pageLimit) * pageLimit + 1;
+    setPageStart(newStart);
+  }, [currentPage, pageLimit]);
+
   const handlePageChange = (page) => {
     if (page < 1 || page > totalPage) return;
     onPageChange(page);
@@ -29,19 +41,21 @@ export default function Pagination({ totalPage, currentPage, onPageChange }) {
           </button>
 
           {/* Page Numbers */}
-          {[...Array(totalPage)].map((_, i) => {
-            const pageNum = i + 1; // Pages start from 1
+          {Array.from(
+            { length: Math.min(pageLimit, totalPage - pageStart + 1) },
+            (_, i) => pageStart + i
+          ).map((page) => {
             return (
               <button
-                key={i}
-                onClick={() => handlePageChange(pageNum)}
+                key={page}
+                onClick={() => handlePageChange(page)}
                 className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold focus:z-20 ${
-                  currentPage === pageNum
+                  currentPage === page
                     ? "z-10 bg-indigo-600 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0"
                 }`}
               >
-                {pageNum}
+                {page}
               </button>
             );
           })}

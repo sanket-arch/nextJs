@@ -48,6 +48,7 @@ function ShowTasks() {
       <Pagination
         totalPage={totalPage}
         currentPage={currentPage}
+        pageLimit={5}
         onPageChange={handlePageChange}
       />
     </div>
