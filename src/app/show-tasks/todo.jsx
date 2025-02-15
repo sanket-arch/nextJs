@@ -16,7 +16,9 @@ function Todo({ todo }) {
 
   return (
     <div key={todo.id}>
-      <p>{todo.id}</p>
+      <p>
+        {todo.id}: {todo.title}
+      </p>
       <button className="border">Update</button>
       <button
         className="border"
