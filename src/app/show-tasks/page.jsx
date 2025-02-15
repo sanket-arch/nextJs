@@ -12,6 +12,7 @@ function ShowTasks() {
     todos,
     5
   );
+  const [isAppear, setIsAppear] = useState(false);
 
   const fetchTodos = async () => {
     try {
@@ -38,10 +39,18 @@ function ShowTasks() {
   useEffect(() => {
     fetchTodos();
   }, []);
-  
+
   if (isLoading) return <Loading />;
   return (
     <div>
+      {isAppear && <span> Appeared</span>}
+      <button
+        onClick={() => {
+          setIsAppear(!isAppear);
+        }}
+      >
+        Show text
+      </button>
       {paginatedData.map((todo) => (
         <Todo key={todo.id} todo={todo} />
       ))}

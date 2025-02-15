@@ -1,0 +1,10 @@
+package required:
+npm install -D jest jest-environment-jsdom @testing-library/react @testing-library/dom @testing-library/jest-dom ts-node
+
+For generating converage: npm test -- --coverage 
+
+for event : @testing-library/user-event
+Important links:
+react-testing-library: https://testing-library.com/docs/react-testing-library/cheatsheet
+jest: https://jestjs.io/docs/api
+msw: https://mswjs.io/docs/network-behavior/rest
